@@ -256,10 +256,10 @@ class TestBuiltinFilters(TempEnvironmentHelper):
         print self.get('out.js')
         assert self.get('out.js') == "function foo(a){var b;document.write(a)}"
 
-    def test_less(self):
+    def test_less2(self):
         if not find_executable('lessc'):
             raise SkipTest()
-        self.mkbundle('foo.css', filters='less', output='out.css').build()
+        self.mkbundle('foo.css', filters='less2', output='out.css').build()
         assert self.get('out.css') == 'h1 {\n  font-family: "Verdana";\n  color: #ffffff;\n}\n'
 
     def test_jsmin(self):
