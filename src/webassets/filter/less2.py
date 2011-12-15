@@ -50,8 +50,8 @@ class Less2Filter(Filter):
     def input(self, _in, out, source_path, output_path):
         proc = subprocess.Popen(
             [self.less or 'lessc'],
+            stdin=subprocess.PIPE,
             stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
             # shell: necessary on windows to execute
             # ruby files, but doesn't work on linux.
             shell=(os.name == 'nt'))
@@ -61,7 +61,7 @@ class Less2Filter(Filter):
 
         # less only writes to stdout, as noted in the method doc, but
         # check everything anyway.
-        if stdout or stderr or proc.returncode != 0:
+        if stderr or proc.returncode != 0:
             raise FilterError(('less: subprocess had error: stderr=%s, '
                                'stdout=%s, returncode=%s') % (
                                             stderr, stdout, proc.returncode))

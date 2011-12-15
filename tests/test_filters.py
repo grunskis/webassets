@@ -260,7 +260,7 @@ class TestBuiltinFilters(TempEnvironmentHelper):
         if not find_executable('lessc'):
             raise SkipTest()
         self.mkbundle('foo.css', filters='less2', output='out.css').build()
-        assert self.get('out.css') == 'h1 {\n  font-family: "Verdana";\n  color: #ffffff;\n}\n'
+        assert self.get('out.css') == 'h1{font-family:"Verdana";color:#FFFFFF;}\n'
 
     def test_jsmin(self):
         self.mkbundle('foo.js', filters='jsmin', output='out.js').build()
