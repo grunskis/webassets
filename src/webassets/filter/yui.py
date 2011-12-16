@@ -54,7 +54,7 @@ class YUIBase(Filter, JavaMixin):
     def output(self, _in, out, **kw):
         args = ['--charset=utf-8', '--type=%s' % self.mode]
         if self.extra_args:
-            args.extend(self.extra_tags)
+            args.extend(self.extra_args)
         self.java_run(_in, out, args)
 
 
