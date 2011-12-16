@@ -46,10 +46,16 @@ class YUIBase(Filter, JavaMixin):
                     "YUI compressor jar."
                 )
 
+        self.extra_args = self.get_config('YUI_COMPRESSOR_EXTRA_ARGS',
+                                          require=False)
+
         self.java_setup()
 
     def output(self, _in, out, **kw):
-        self.java_run(_in, out, ['--charset=utf-8', '--type=%s' % self.mode])
+        args = ['--charset=utf-8', '--type=%s' % self.mode]
+        if self.extra_args:
+            args.extend(self.extra_tags)
+        self.java_run(_in, out, args)
 
 
 class YUIJSFilter(YUIBase):
